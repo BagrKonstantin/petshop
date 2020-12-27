@@ -119,6 +119,10 @@ class UI_Task5(QMainWindow, Ui_MainWindow):
                 self.con.commit()
             except Exception as ex:
                 print(ex)
+        try:
+            QMessageBox.information(self, "Успех!", "Данные успешно сохранены", QMessageBox.Ok)
+        except Exception as er:
+            print(er)
 
     def delete(self):
         self.tableWidget.removeRow(self.tableWidget.verticalHeader().sortIndicatorSection())
