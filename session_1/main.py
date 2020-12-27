@@ -21,7 +21,6 @@ class Save(QMainWindow, SaveWin):
             p_price = float(self.lineEdit_purchasing_price.text())
             r_price = float(self.lineEdit_retail_price.text())
             description = str(self.textBrowser.toPlainText())
-            print(title, pet, type_p, description, p_price, r_price)
 
             con = sqlite3.connect(self.path)
             cur = con.cursor()
