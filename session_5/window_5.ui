@@ -158,19 +158,6 @@
      <string>Закрыть</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_delete">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>330</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Удалить</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="pushButton_save">
     <property name="geometry">
      <rect>
@@ -184,7 +171,7 @@
      <string>Сохранить</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_save_2">
+   <widget class="QPushButton" name="pushButton_count">
     <property name="geometry">
      <rect>
       <x>200</x>

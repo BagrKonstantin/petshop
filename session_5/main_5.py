@@ -30,7 +30,6 @@ class UI_Task5(QMainWindow, Ui_MainWindow):
         self.pushButton_close.clicked.connect(self.close)
         self.pushButton_add.clicked.connect(self.add)
         self.pushButton_save.clicked.connect(self.save)
-        self.pushButton_delete.clicked.connect(self.delete)
         self.pushButton_count.clicked.connect(self.count_price)
 
     def get_data(self):
@@ -123,9 +122,6 @@ class UI_Task5(QMainWindow, Ui_MainWindow):
             QMessageBox.information(self, "Успех!", "Данные успешно сохранены", QMessageBox.Ok)
         except Exception as er:
             print(er)
-
-    def delete(self):
-        self.tableWidget.removeRow(self.tableWidget.verticalHeader().sortIndicatorSection())
 
 
 if __name__ == "__main__":
