@@ -118,7 +118,7 @@ class Win1(QMainWindow, Ui_MainWindow):
                 buy_price = int(
                     sheet[
                         str(list(sheet.rows)[i][4]).strip("<Cell '{}'".format(sheet_name)).strip('.').strip('>')].value)
-                second_price = 0.3 * buy_price
+                second_price = 1.5 * buy_price
                 cur.execute(
                     """insert into products (title_products, pet, type, description, purchase_price, retail_price) values (?, ?, ?, ?, ?, ?)""",
                     (name, pet_name, category, info, buy_price, second_price))
