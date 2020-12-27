@@ -84,18 +84,6 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QLabel" name="label_5">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>Розничная цена</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </widget>
    <widget class="QLineEdit" name="lineEdit_title">
@@ -112,7 +100,7 @@
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>50</y>
+      <y>70</y>
       <width>151</width>
       <height>22</height>
      </rect>
@@ -152,7 +140,7 @@
     <property name="geometry">
      <rect>
       <x>190</x>
-      <y>90</y>
+      <y>120</y>
       <width>151</width>
       <height>22</height>
      </rect>
@@ -184,16 +172,6 @@
     </item>
    </widget>
    <widget class="QLineEdit" name="lineEdit_purchasing_price">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>130</y>
-      <width>151</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_retail_price">
     <property name="geometry">
      <rect>
       <x>190</x>
@@ -245,19 +223,6 @@
     </property>
     <property name="text">
      <string>Сохранить</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_close">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>440</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Закрыть</string>
     </property>
    </widget>
   </widget>

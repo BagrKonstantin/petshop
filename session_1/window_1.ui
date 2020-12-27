@@ -76,14 +76,27 @@
    <widget class="QPushButton" name="pushButton_insert">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>300</x>
       <y>430</y>
-      <width>93</width>
+      <width>121</width>
       <height>28</height>
      </rect>
     </property>
     <property name="text">
-     <string>Дополнить</string>
+     <string>Загрузить данные</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_log">
+    <property name="geometry">
+     <rect>
+      <x>432</x>
+      <y>430</y>
+      <width>151</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Журнал изменения цен</string>
     </property>
    </widget>
   </widget>
