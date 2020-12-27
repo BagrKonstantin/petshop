@@ -73,7 +73,7 @@
      <string>Изменить цены</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_update">
+   <widget class="QPushButton" name="pushButton_insert">
     <property name="geometry">
      <rect>
       <x>490</x>
@@ -83,7 +83,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Обновить</string>
+     <string>Дополнить</string>
     </property>
    </widget>
   </widget>
