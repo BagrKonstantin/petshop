@@ -52,10 +52,6 @@ class MainWindow(QMainWindow, MainW):
         self.close()
 
 
-
-
-
-
 if __name__ == "__main__":
     import sys
 

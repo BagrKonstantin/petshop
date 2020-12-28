@@ -41,7 +41,7 @@ class Save(QMainWindow, SaveWin):
             QMessageBox.critical(self, "Ошибка", "Введены неверные данные", QMessageBox.Ok)
             print(err)
 
-    def cls(self):
+    def closeEvent(self, event):
         self.win = Win1("bd.db")
         self.win.show()
         self.close()
@@ -78,14 +78,14 @@ class ChangePrice(QMainWindow, ChangeWin):
                 self.data[0][0], self.data[0][1], self.spinBox_2.value()))
             con.commit()
             con.close()
-            self.win = Win1("../bd.db")
+            self.win = Win1("bd.db")
             self.win.show()
             self.close()
         except Exception as err:
             print(err)
 
     def closeEvent(self, event):
-        self.win = Win1("../bd.db")
+        self.win = Win1("bd.db")
         self.win.show()
         self.close()
 
