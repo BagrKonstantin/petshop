@@ -78,14 +78,14 @@ class ChangePrice(QMainWindow, ChangeWin):
                 self.data[0][0], self.data[0][1], self.spinBox_2.value()))
             con.commit()
             con.close()
-            self.win = Win1("bd.db")
+            self.win = Win1("../bd.db")
             self.win.show()
             self.close()
         except Exception as err:
             print(err)
 
     def closeEvent(self, event):
-        self.win = Win1("bd.db")
+        self.win = Win1("../bd.db")
         self.win.show()
         self.close()
 
@@ -114,6 +114,19 @@ class LogPrice(QMainWindow, LogWin):
             self.tableWidget.item(i, 0).setText(self.data[i][1])
             self.tableWidget.item(i, 1).setText(str(self.data[i][2]))
             self.tableWidget.item(i, 2).setText(str(self.data[i][3]))
+
+        for i in range(self.tableWidget.rowCount()):
+            item = self.tableWidget.item(i, 1)
+            font = QtGui.QFont()
+            font.setStrikeOut(True)
+            item.setFont(font)
+            brush = QtGui.QBrush(QtGui.QColor(170, 0, 0))
+            brush.setStyle(QtCore.Qt.NoBrush)
+            item.setForeground(brush)
+            item = self.tableWidget.item(i, 2)
+            brush = QtGui.QBrush(QtGui.QColor(0, 170, 0))
+            brush.setStyle(QtCore.Qt.NoBrush)
+            item.setForeground(brush)
 
     def closeEvent(self, event):
         self.win = Win1("bd.db")
