@@ -67,5 +67,5 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "Описание"))
         self.pushButton_add.setText(_translate("MainWindow", "Добавить"))
         self.pushButton_change_price.setText(_translate("MainWindow", "Изменить цены"))
-        self.pushButton_insert.setText(_translate("MainWindow", "Загрузить данные"))
-        self.pushButton_log.setText(_translate("MainWindow", "Журнал изменения цен"))
+        self.pushButton_insert.setText(_translate("MainWindow", "Дополнить"))
+        self.pushButton_log.setText(_translate("MainWindow", "История"))

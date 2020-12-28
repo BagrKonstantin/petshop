@@ -95,7 +95,7 @@ class LogPrice(QMainWindow, LogWin):
         parent.setDisabled(True)
         super(LogPrice, self).__init__(parent)
         self.setupUi(self)
-        self.setWindowTitle('Журнал изменения цен')
+        self.setWindowTitle('История')
         self.parent = parent
         con = sqlite3.connect(self.parent.path)
         cur = con.cursor()
