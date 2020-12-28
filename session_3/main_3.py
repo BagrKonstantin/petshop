@@ -121,12 +121,6 @@ class Win3(QMainWindow, Ui_MainWindow):
             print(er)
         self.conn.close()
 
-    def closeEvent(self, event):
-        from main import Window
-        self.win = Window()
-        self.win.show()
-        self.close()
-
 
 if __name__ == "__main__":
     import sys

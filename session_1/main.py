@@ -239,10 +239,6 @@ class Win1(QMainWindow, Ui_MainWindow):
             print(er)
         con.close()
 
-    def closeEvent(self, event):
-        self.win = Window()
-        self.win.show()
-        self.close()
 
 
 if __name__ == "__main__":

@@ -17,11 +17,6 @@ class SellWindow(QMainWindow, Ui_MainWindow):
         self.tableWidget.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
 
-    def closeEvent(self, event):
-        from storage.main import MainWindow
-        self.win = MainWindow("bd.db")
-        self.win.show()
-        self.close()
 
 
 
