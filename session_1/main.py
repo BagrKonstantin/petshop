@@ -41,7 +41,7 @@ class Save(QMainWindow, SaveWin):
             QMessageBox.critical(self, "Ошибка", "Введены неверные данные", QMessageBox.Ok)
             print(err)
 
-    def cls(self):
+    def closeEvent(self, event):
         self.win = Win1("../bd.db")
         self.win.show()
         self.close()
@@ -78,7 +78,7 @@ class ChangePrice(QMainWindow, ChangeWin):
                                                              self.id))
             print(self.data[0][0], self.data[0][1], self.spinBox_2.value())
             cur.execute(
-                """insert into price_changes (title_product, old_price, new_price) VALUES ("{}", {}, {})""".format(
+                """insert into price_changes (title_product, old_price, new_price) VALUES ('{}', {}, {})""".format(
                     self.data[0][0], self.data[0][1], self.spinBox_2.value()))
             con.commit()
             con.close()
