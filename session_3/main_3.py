@@ -42,7 +42,7 @@ class Client(QMainWindow, AddClient):
             print(er)
 
     def cls(self):
-        self.win = Win3("../bd.db")
+        self.win = Win3("bd.db")
         self.win.show()
         self.close()
 
@@ -120,6 +120,12 @@ class Win3(QMainWindow, Ui_MainWindow):
         except Exception as er:
             print(er)
         self.conn.close()
+
+    def closeEvent(self, event):
+        from main import Window
+        self.win = Window()
+        self.win.show()
+        self.close()
 
 
 if __name__ == "__main__":

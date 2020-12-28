@@ -4,6 +4,7 @@ from session_1.window_1 import Ui_MainWindow
 from session_1.save_window import Ui_MainWindow as SaveWin
 from session_1.change_price import Ui_MainWindow as ChangeWin
 from session_1.log_price_change import Ui_MainWindow as LogWin
+from main import Window
 import sqlite3
 import openpyxl
 
@@ -237,6 +238,11 @@ class Win1(QMainWindow, Ui_MainWindow):
         except Exception as er:
             print(er)
         con.close()
+
+    def closeEvent(self, event):
+        self.win = Window()
+        self.win.show()
+        self.close()
 
 
 if __name__ == "__main__":

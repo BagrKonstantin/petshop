@@ -51,6 +51,12 @@ class MainWindow(QMainWindow, MainW):
         self.win.show()
         self.close()
 
+    def closeEvent(self, event):
+        from main import Window
+        self.win = Window()
+        self.win.show()
+        self.close()
+
 
 if __name__ == "__main__":
     import sys

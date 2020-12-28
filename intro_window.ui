@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>210</x>
+      <x>110</x>
       <y>90</y>
       <width>141</width>
       <height>121</height>
@@ -30,7 +30,7 @@
    <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>480</x>
       <y>90</y>
       <width>141</width>
       <height>121</height>
@@ -38,6 +38,19 @@
     </property>
     <property name="text">
      <string>Система учёта</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>90</y>
+      <width>141</width>
+      <height>121</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Пользователи</string>
     </property>
    </widget>
   </widget>

@@ -12,6 +12,16 @@ class Window(QMainWindow, Ui_MainWindow):
 
         self.pushButton.clicked.connect(self.products)
         self.pushButton_2.clicked.connect(self.system)
+        self.pushButton_3.clicked.connect(self.user)
+
+    def user(self):
+        try:
+            from session_3 import main_3
+            self.win1 = main_3.Win3(self.path)
+            self.win1.show()
+            self.close()
+        except Exception as err:
+            print(err)
 
     def products(self):
         try:
