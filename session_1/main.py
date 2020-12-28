@@ -4,17 +4,17 @@ from session_1.window_1 import Ui_MainWindow
 from session_1.save_window import Ui_MainWindow as SaveWin
 from session_1.change_price import Ui_MainWindow as ChangeWin
 from session_1.log_price_change import Ui_MainWindow as LogWin
-from main import Window
 import sqlite3
 import openpyxl
 
 
 class Save(QMainWindow, SaveWin):
-    def __init__(self, path):
-        super(Save, self).__init__()
+    def __init__(self, parent=None):
+        parent.setDisabled(True)
+        super(Save, self).__init__(parent)
         self.setupUi(self)
         self.setWindowTitle('Ввести данные')
-        self.path = path
+        self.parent = parent
         self.pushButton_save.clicked.connect(self.save_data)
 
     def save_data(self):
@@ -27,7 +27,7 @@ class Save(QMainWindow, SaveWin):
             description = str(self.textBrowser.toPlainText())
             print(title, pet, type_p, description, p_price, r_price)
 
-            con = sqlite3.connect(self.path)
+            con = sqlite3.connect(self.parent.path)
             cur = con.cursor()
             cur.execute(
                 """insert into products (title_products, pet, type, description, purchase_price, retail_price) VALUES 
@@ -35,31 +35,30 @@ class Save(QMainWindow, SaveWin):
                     title, pet, type_p, description, p_price, r_price))
             con.commit()
             con.close()
-            self.win = Win1("bd.db")
-            self.win.show()
-            self.close()
+            self.parent.update_data()
+            self.parent.setDisabled(False)
         except Exception as err:
             QMessageBox.critical(self, "Ошибка", "Введены неверные данные", QMessageBox.Ok)
             print(err)
 
     def closeEvent(self, event):
-        self.win = Win1("bd.db")
-        self.win.show()
-        self.close()
+        self.parent.update_data()
+        self.parent.setDisabled(False)
 
 
 class ChangePrice(QMainWindow, ChangeWin):
-    def __init__(self, path, id):
-        super(ChangePrice, self).__init__()
+    def __init__(self, parent=None):
+        parent.setDisabled(True)
+        super(ChangePrice, self).__init__(parent)
         self.setupUi(self)
         self.setWindowTitle('Изменение цены')
-        self.path = path
-        self.id = id
+        self.parent = parent
 
-        con = sqlite3.connect(self.path)
+        con = sqlite3.connect(self.parent.path)
         cur = con.cursor()
         self.data = cur.execute(
-            """Select title_products, purchase_price from products where id_products = {}""".format(id)).fetchall()
+            """Select title_products, purchase_price from products where id_products = {}""".format(
+                self.parent.id)).fetchall()
         con.close()
 
         self.lineEdit.setText(self.data[0][0])
@@ -69,35 +68,36 @@ class ChangePrice(QMainWindow, ChangeWin):
 
     def save(self):
         try:
-            con = sqlite3.connect(self.path)
+            con = sqlite3.connect(self.parent.path)
             cur = con.cursor()
             cur.execute("""update products 
                             set purchase_price = {}, retail_price = {} 
-                            where id_products = {}""".format(self.spinBox_2.value(), self.spinBox_2.value() * 1.5, self.id))
+                            where id_products = {}""".format(self.spinBox_2.value(), self.spinBox_2.value() * 1.5,
+                                                             self.parent.id))
             print(self.data[0][0], self.data[0][1], self.spinBox_2.value())
-            cur.execute("""insert into price_changes (title_product, old_price, new_price) VALUES ("{}", {}, {})""".format(
-                self.data[0][0], self.data[0][1], self.spinBox_2.value()))
+            cur.execute(
+                """insert into price_changes (title_product, old_price, new_price) VALUES ("{}", {}, {})""".format(
+                    self.data[0][0], self.data[0][1], self.spinBox_2.value()))
             con.commit()
             con.close()
-            self.win = Win1("bd.db")
-            self.win.show()
-            self.close()
+            self.parent.update()
+            self.setDisabled(False)
         except Exception as err:
             print(err)
 
     def closeEvent(self, event):
-        self.win = Win1("bd.db")
-        self.win.show()
-        self.close()
+        self.parent.update()
+        self.parent.setDisabled(False)
 
 
 class LogPrice(QMainWindow, LogWin):
-    def __init__(self, path):
-        super(LogPrice, self).__init__()
+    def __init__(self, parent=None):
+        parent.setDisabled(True)
+        super(LogPrice, self).__init__(parent)
         self.setupUi(self)
         self.setWindowTitle('Журнал изменения цен')
-        self.path = path
-        con = sqlite3.connect(self.path)
+        self.parent = parent
+        con = sqlite3.connect(self.parent.path)
         cur = con.cursor()
         self.data = cur.execute("""select * from price_changes""").fetchall()
 
@@ -130,9 +130,8 @@ class LogPrice(QMainWindow, LogWin):
             item.setForeground(brush)
 
     def closeEvent(self, event):
-        self.win = Win1("bd.db")
-        self.win.show()
-        self.close()
+        self.parent.update()
+        self.parent.setDisabled(False)
 
 
 class Win1(QMainWindow, Ui_MainWindow):
@@ -161,9 +160,8 @@ class Win1(QMainWindow, Ui_MainWindow):
 
     def log(self):
         try:
-            self.win = LogPrice(self.path)
+            self.win = LogPrice(self)
             self.win.show()
-            self.close()
         except Exception as err:
             print(err)
 
@@ -172,9 +170,12 @@ class Win1(QMainWindow, Ui_MainWindow):
         if self.tableWidget.verticalHeader().sortIndicatorSection() == self.tableWidget.rowCount():
             QMessageBox.critical(self, "Ошибка", "Выберите строку", QMessageBox.Ok)
         else:
-            self.win = ChangePrice(self.path, self.data[self.tableWidget.verticalHeader().sortIndicatorSection()][0])
-            self.win.show()
-            self.close()
+            try:
+                self.id = self.data[self.tableWidget.verticalHeader().sortIndicatorSection()][0]
+                self.win = ChangePrice(self)
+                self.win.show()
+            except Exception as er:
+                print(er)
 
     def update_data(self):
         con = sqlite3.connect(self.path)
@@ -201,9 +202,8 @@ class Win1(QMainWindow, Ui_MainWindow):
             self.tableWidget.item(i, 3).setText(self.data[i][4])
 
     def add(self):
-        self.win = Save(self.path)
+        self.win = Save(self)
         self.win.show()
-        self.close()
 
     def insert(self):
         con = sqlite3.connect(self.path)
@@ -240,11 +240,10 @@ class Win1(QMainWindow, Ui_MainWindow):
         con.close()
 
 
-
 if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    mainWindow = Win1("bd.db")
+    mainWindow = Win1("../bd.db")
     mainWindow.show()
     sys.exit(app.exec())

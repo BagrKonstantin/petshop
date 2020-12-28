@@ -135,6 +135,6 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    mainWindow = UI_Task5("bd.db")
+    mainWindow = UI_Task5("../bd.db")
     mainWindow.show()
     sys.exit(app.exec())

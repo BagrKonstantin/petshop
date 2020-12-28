@@ -8,12 +8,13 @@ import openpyxl
 
 
 class Client(QMainWindow, AddClient):
-    def __init__(self, path):
-        super(Client, self).__init__()
+    def __init__(self, parent=None):
+        parent.setDisabled(True)
+        super(Client, self).__init__(parent)
         self.setupUi(self)
         self.setWindowTitle("Добавить")
-        self.path = path
-        self.conn = sqlite3.connect(self.path)
+        self.parent = parent
+        self.conn = sqlite3.connect(self.parent.path)
         self.curs = self.conn.cursor()
         self.pushButton_close.clicked.connect(self.cls)
         self.pushButton_save.clicked.connect(self.save)
@@ -42,9 +43,13 @@ class Client(QMainWindow, AddClient):
             print(er)
 
     def cls(self):
-        self.win = Win3("bd.db")
-        self.win.show()
+        self.parent.update_data()
+        self.parent.setDisabled(False)
         self.close()
+
+    def closeEvent(self, event):
+        self.parent.update_data()
+        self.parent.setDisabled(False)
 
 
 class Win3(QMainWindow, Ui_MainWindow):
@@ -85,9 +90,8 @@ class Win3(QMainWindow, Ui_MainWindow):
 
     def add(self):
         try:
-            self.win = Client(self.path)
+            self.win = Client(self)
             self.win.show()
-            self.close()
         except Exception as er:
             print(er)
 
