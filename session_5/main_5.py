@@ -27,7 +27,7 @@ class UI_Task5(QMainWindow, Ui_MainWindow):
         self.tableWidget.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
 
-        self.pushButton_close.clicked.connect(self.close)
+        #self.pushButton_close.clicked.connect(self.close)
         self.pushButton_add.clicked.connect(self.add)
         self.pushButton_save.clicked.connect(self.save)
         self.pushButton_count.clicked.connect(self.count_price)

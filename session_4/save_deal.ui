@@ -137,7 +137,7 @@
      <rect>
       <x>20</x>
       <y>250</y>
-      <width>501</width>
+      <width>521</width>
       <height>231</height>
      </rect>
     </property>
@@ -149,6 +149,11 @@
     <column>
      <property name="text">
       <string>Цена</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Количество</string>
      </property>
     </column>
     <column>
@@ -183,7 +188,7 @@
      <string>Закрыть</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_save_2">
+   <widget class="QPushButton" name="pushButton_add">
     <property name="geometry">
      <rect>
       <x>362</x>
@@ -194,6 +199,19 @@
     </property>
     <property name="text">
      <string>Добавить товар</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_save_3">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>500</y>
+      <width>131</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Расчитать</string>
     </property>
    </widget>
   </widget>
