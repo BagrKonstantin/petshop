@@ -53,9 +53,8 @@ class UI_Task5(QMainWindow, Ui_MainWindow):
 
             try:
                 self.tableWidget.setItem(i, 3, QTableWidgetItem())
-                self.tableWidget.item(i, 3).setText(
-                    str(float(self.tableWidget.item(i, 1).text()) * float(
-                        self.tableWidget.item(i, 2).text())))
+                self.count = float(self.tableWidget.item(i, 2).text())
+                self.sum = self.tableWidget.item(i, 3).setText(str(float(self.tableWidget.item(i, 1).text()) * self.count))
             except Exception as ex:
                 print(ex)
             self.total += float(self.tableWidget.item(i, 3).text())
@@ -113,8 +112,8 @@ class UI_Task5(QMainWindow, Ui_MainWindow):
             try:
                 prod_id = self.cur.execute("""select id_products from products where title_products = '{}' """.format(
                     self.tableWidget.cellWidget(i, 0).currentText())).fetchone()[0]
-                self.cur.execute("""insert into purchases (id_product, amount, total) values (?, ?, ?)""",
-                                 (prod_id, self.price, self.total))
+                self.cur.execute("""insert into purchases (id_product, amount, count, total) values (?, ?, ?, ?)""",
+                                 (prod_id, self.price, self.count, self.count * self.price))
                 self.con.commit()
             except Exception as ex:
                 print(ex)

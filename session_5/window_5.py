@@ -89,7 +89,7 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.label.setText(_translate("MainWindow", "Покупка"))
         self.label_2.setText(_translate("MainWindow", "Итог:"))
-        self.label_3.setText(_translate("MainWindow", "875,00"))
+        self.label_3.setText(_translate("MainWindow", "0,00"))
         self.tableWidget.setSortingEnabled(True)
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Товар"))
