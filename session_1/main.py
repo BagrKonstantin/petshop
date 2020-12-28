@@ -34,7 +34,7 @@ class Save(QMainWindow, SaveWin):
                     title, pet, type_p, description, p_price, r_price))
             con.commit()
             con.close()
-            self.win = Win1("../bd.db")
+            self.win = Win1("bd.db")
             self.win.show()
             self.close()
         except Exception as err:
@@ -42,7 +42,7 @@ class Save(QMainWindow, SaveWin):
             print(err)
 
     def cls(self):
-        self.win = Win1("../bd.db")
+        self.win = Win1("bd.db")
         self.win.show()
         self.close()
 
@@ -78,14 +78,14 @@ class ChangePrice(QMainWindow, ChangeWin):
                 self.data[0][0], self.data[0][1], self.spinBox_2.value()))
             con.commit()
             con.close()
-            self.win = Win1("../bd.db")
+            self.win = Win1("bd.db")
             self.win.show()
             self.close()
         except Exception as err:
             print(err)
 
     def closeEvent(self, event):
-        self.win = Win1("../bd.db")
+        self.win = Win1("bd.db")
         self.win.show()
         self.close()
 
@@ -116,7 +116,7 @@ class LogPrice(QMainWindow, LogWin):
             self.tableWidget.item(i, 2).setText(str(self.data[i][3]))
 
     def closeEvent(self, event):
-        self.win = Win1("../bd.db")
+        self.win = Win1("bd.db")
         self.win.show()
         self.close()
 
@@ -230,6 +230,6 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    mainWindow = Win1("../bd.db")
+    mainWindow = Win1("bd.db")
     mainWindow.show()
     sys.exit(app.exec())

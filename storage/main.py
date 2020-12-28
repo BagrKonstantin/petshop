@@ -10,15 +10,19 @@ class MainWindow(QMainWindow, MainW):
         self.setupUi(self)
         self.setWindowTitle("Главное окно")
         self.path = path
-        con = sqlite3.connect(self.path)
-        cur = con.cursor()
-        self.data = cur.execute("""select id_products, title_products, pet, type, count from products""").fetchall()
 
         self.tableWidget.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
         self.tableWidget.horizontalHeader().setSectionResizeMode(3, QtWidgets.QHeaderView.Stretch)
 
+        self.update_table()
+
+    def update_table(self):
+        con = sqlite3.connect(self.path)
+        cur = con.cursor()
+        self.data = cur.execute("""select id_products, title_products, pet, type, count from products""").fetchall()
+        self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         n = len(self.data)
         self.tableWidget.setRowCount(n)
         for i in range(n):
@@ -32,6 +36,21 @@ class MainWindow(QMainWindow, MainW):
             self.tableWidget.item(i, 2).setText(str(self.data[i][3]))
             self.tableWidget.item(i, 3).setText(str(self.data[i][4]))
 
+        self.pushButton_purchase.clicked.connect(self.purchase)
+        self.pushButton_sell.clicked.connect(self.sell)
+
+    def sell(self):
+        from storage.sell import SellWindow
+        self.win = SellWindow(self.path)
+        self.win.show()
+        self.close()
+
+    def purchase(self):
+        from session_5.main_5 import UI_Task5
+        self.win = UI_Task5(self.path)
+        self.win.show()
+        self.close()
+
 
 
 
@@ -41,6 +60,6 @@ if __name__ == "__main__":
     import sys
 
     app = QtWidgets.QApplication(sys.argv)
-    mainWindow = MainWindow("../bd.db")
+    mainWindow = MainWindow("bd.db")
     mainWindow.show()
     sys.exit(app.exec())
