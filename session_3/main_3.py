@@ -60,7 +60,7 @@ class Win3(QMainWindow, Ui_MainWindow):
         self.path = path
         self.conn = sqlite3.connect(self.path)
         self.curs = self.conn.cursor()
-        self.pushButton_close.clicked.connect(self.close)
+        #self.pushButton_close.clicked.connect(self.close)
         self.pushButton_add.clicked.connect(self.add)
         self.pushButton_insert.clicked.connect(self.insert)
 
