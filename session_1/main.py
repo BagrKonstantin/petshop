@@ -64,6 +64,8 @@ class ChangePrice(QMainWindow, ChangeWin):
         self.lineEdit.setText(self.data[0][0])
         self.lineEdit_old_price.setText(str(self.data[0][1]))
 
+        self.spinBox_2.setValue(self.data[0][1])
+
         self.pushButton_save.clicked.connect(self.save)
 
     def save(self):
@@ -72,10 +74,12 @@ class ChangePrice(QMainWindow, ChangeWin):
             cur = con.cursor()
             cur.execute("""update products 
                             set purchase_price = {}, retail_price = {} 
-                            where id_products = {}""".format(self.spinBox_2.value(), self.spinBox_2.value() * 1.5, self.id))
+                            where id_products = {}""".format(self.spinBox_2.value(), self.spinBox_2.value() * 1.5,
+                                                             self.id))
             print(self.data[0][0], self.data[0][1], self.spinBox_2.value())
-            cur.execute("""insert into price_changes (title_product, old_price, new_price) VALUES ("{}", {}, {})""".format(
-                self.data[0][0], self.data[0][1], self.spinBox_2.value()))
+            cur.execute(
+                """insert into price_changes (title_product, old_price, new_price) VALUES ("{}", {}, {})""".format(
+                    self.data[0][0], self.data[0][1], self.spinBox_2.value()))
             con.commit()
             con.close()
             self.win = Win1("../bd.db")
@@ -114,6 +118,19 @@ class LogPrice(QMainWindow, LogWin):
             self.tableWidget.item(i, 0).setText(self.data[i][1])
             self.tableWidget.item(i, 1).setText(str(self.data[i][2]))
             self.tableWidget.item(i, 2).setText(str(self.data[i][3]))
+
+        for i in range(self.tableWidget.rowCount()):
+            item = self.tableWidget.item(i, 1)
+            font = QtGui.QFont()
+            font.setStrikeOut(True)
+            item.setFont(font)
+            brush = QtGui.QBrush(QtGui.QColor(170, 0, 0))
+            brush.setStyle(QtCore.Qt.NoBrush)
+            item.setForeground(brush)
+            item = self.tableWidget.item(i, 2)
+            brush = QtGui.QBrush(QtGui.QColor(0, 170, 0))
+            brush.setStyle(QtCore.Qt.NoBrush)
+            item.setForeground(brush)
 
     def closeEvent(self, event):
         self.win = Win1("../bd.db")
